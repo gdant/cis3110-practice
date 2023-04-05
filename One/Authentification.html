@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>Authentication Page</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+	<h2>Authentication Page</h2>
+	<form ng-submit="submitLogin()">
+	  <label for="name">Username:</label><br>
+	  <input type="text" id="Name" name="Name" ng-model="loginData.username"><br>
+	  <label for="password">Password:</label><br>
+	  <input type="text" id="password" name="password" ng-model="loginData.password"><br><br>
+	  <button class="button button-block button-positive" type="submit">Log in</button>
+	</form>
+
+	<script>
+		var app = angular.module("myApp", []);
+		app.controller("myCtrl", function($scope) {
+			$scope.userdata = [{
+				username: "name",
+				password: "password"
+			}, {
+			    username: "u",
+			    password: "p"
+			}];
+
+			$scope.submitLogin = function() {
+				var addToArray = false;
+				for(var i=0;i<$scope.userdata.length;i++){
+				    if($scope.userdata[i].username===$scope.loginData.username && $scope.userdata[i].password===$scope.loginData.password){
+				        addToArray=true;
+				    }
+				}
+				if(addToArray == true) {
+				    window.location.href="Dashboard.html";
+				} else {
+				    alert("Invalid credentials!");
+				}
+			};
+		});
+	</script>
+</body>
+</html>

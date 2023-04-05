@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>Edit Account Settings</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-cookies/1.8.2/angular-cookies.min.js"></script>
+	<script>
+		var app = angular.module("myApp", ['ngCookies']);
+		app.controller("editSettingsController", function ($scope, $cookies) {
+			$scope.profile = $cookies.getObject('profile');
+			$scope.personalDetails = $cookies.getObject('personalDetails');
+			$scope.saveChanges = function() {
+				$cookies.putObject('profile', $scope.profile);
+				$cookies.putObject('personalDetails', $scope.personalDetails);
+				alert('Changes saved!');
+			}
+		});
+	</script>
+</head>
+<body ng-controller="editSettingsController">
+	<h1>Edit Account Settings</h1>
+	<h2>Profile</h2>
+	<form>
+		<label>First Name:</label>
+		<input type="text" ng-model="profile.firstName"><br><br>
+		<label>Last Name:</label>
+		<input type="text" ng-model="profile.lastName"><br><br>
+		<label>Email:</label>
+		<input type="email" ng-model="profile.email"><br><br>
+	</form>
+	<hr>
+	<h2>Personal Details</h2>
+	<form>
+		<label>Address:</label>
+		<input type="text" ng-model="personalDetails.address"><br><br>
+		<label>City:</label>
+		<input type="text" ng-model="personalDetails.city"><br><br>
+		<label>State:</label>
+		<input type="text" ng-model="personalDetails.state"><br><br>
+		<label>Zipcode:</label>
+		<input type="text" ng-model="personalDetails.zipcode"><br><br>
+	</form>
+	<button type="button" ng-click="saveChanges()">Save Changes</button>
+	
+	<p><a href=Settings.html>back</a></p>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>Account Settings</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-cookies/1.8.2/angular-cookies.min.js"></script>
+	<script>
+		var app = angular.module("myApp", ['ngCookies']);
+		app.controller("displaySettingsController", function ($scope, $cookies) {
+			$scope.profile = $cookies.getObject('profile');
+			$scope.personalDetails = $cookies.getObject('personalDetails');
+		});
+	</script>
+</head>
+<body ng-controller="displaySettingsController">
+	<h1>Account Settings</h1>
+	<h2>Profile</h2>
+	<label>First Name:</label> {{profile.firstName}}<br>
+	<label>Last Name:</label> {{profile.lastName}}<br>
+	<label>Email:</label> {{profile.email}}<br>
+	
+	<h2>Personal Details</h2>
+	<label>Address:</label> {{personalDetails.address}}<br>
+	<label>City:</label> {{personalDetails.city}}<br>
+	<label>State:</label> {{personalDetails.state}}<br>
+	<label>Zipcode:</label> {{personalDetails.zipcode}}<br>
+	
+	<a href="Edit_Page.html">Edit</a>
+	<a href=Dashboard.html>Back</a>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Information Page</title>
+</head>
+<body>
+	<h1>Information Page</h1>
+	<div id="information"></div>
+
+	<script>
+		
+		var infoData = [
+			{
+				"title": "Placeholder 1",
+				"description": "Description 1"
+			},
+			{
+				"title": "Placeholder 2",
+				"description": "Description 2."
+			},
+			{
+				"title": "Placeholder 3",
+				"description": "Description 3."
+			}
+		];
+
+        var informationDiv = document.getElementById("information");
+		for (var i = 0; i < infoData.length; i++) {
+			var info = infoData[i];
+			var infoDiv = document.createElement("div");
+			infoDiv.setAttribute("class", "info");
+			var titleDiv = document.createElement("div");
+			titleDiv.setAttribute("class", "title");
+			titleDiv.appendChild(document.createTextNode(info.title));
+			var descriptionDiv = document.createElement("div");
+			descriptionDiv.setAttribute("class", "description");
+			descriptionDiv.appendChild(document.createTextNode(info.description));
+			infoDiv.appendChild(titleDiv);
+			infoDiv.appendChild(descriptionDiv);
+			informationDiv.appendChild(infoDiv);
+		}
+	</script>
+	<p><a href=Dashboard.html>Back</a></p>
+</body>
+</html>
