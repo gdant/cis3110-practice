@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4">NavBar</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="Dashboard2.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="Info2.html" class="nav-link">Info</a></li>
+        <li class="nav-item"><a href="Settings2.html" class="nav-link active">Settings</a></li>
+        <li class="nav-item"><a href="Authentification2.html" class="nav-link">Logout</a></li>
+      </ul>
+    </header>
+
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<title>Edit Account Settings</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-cookies/1.8.2/angular-cookies.min.js"></script>
+	<script>
+		var app = angular.module("myApp", ['ngCookies']);
+		app.controller("editSettingsController", function ($scope, $cookies) {
+			$scope.profile = $cookies.getObject('profile');
+			$scope.personalDetails = $cookies.getObject('personalDetails');
+			$scope.saveChanges = function() {
+				$cookies.putObject('profile', $scope.profile);
+				$cookies.putObject('personalDetails', $scope.personalDetails);
+				alert('Changes saved!');
+			}
+		});
+	</script>
+	<script>
+		app.controller("editSettingsController", function ($scope, $cookies) {
+    $scope.profile = $cookies.getObject('profile');
+    $scope.personalDetails = $cookies.getObject('personalDetails');
+    
+    $scope.saveChanges = function() {
+        // Check if any input fields are empty
+        if (!$scope.profile.firstName || !$scope.profile.lastName || !$scope.profile.email ||
+            !$scope.personalDetails.address || !$scope.personalDetails.city ||
+            !$scope.personalDetails.state || !$scope.personalDetails.zipcode) {
+            alert('Please fill in all fields!');
+            return;
+        }
+        
+        // Save changes if all input fields are filled
+        $cookies.putObject('profile', $scope.profile);
+        $cookies.putObject('personalDetails', $scope.personalDetails);
+        alert('Changes saved!');
+    }
+});
+	</script>
+</head>
+
+<body ng-controller="editSettingsController">
+	<h2 class="text-success">Edit Account Settings</h2>
+	<h3 class="text-success-subtle">Profile</h3>
+	<form>
+		<label>First Name:</label>
+		<input type="text" class="form-control" ng-model="profile.firstName" ng-class="{ 'is-invalid': !profile.firstName }"><br><br>
+		<label>Last Name:</label>
+		<input type="text" class="form-control" ng-model="profile.lastName" ng-class="{ 'is-invalid': !profile.lastName }"><br><br>
+		<label>Email:</label>
+		<input type="email" class="form-control" ng-model="profile.email" ng-class="{ 'is-invalid': !profile.email }"><br><br>
+	</form>
+	<hr>
+
+	<h3>Personal Details</h3>
+	<form>
+		<label>Address:</label>
+		<input type="text" class="form-control" ng-model="personalDetails.address" ng-class="{ 'is-invalid': !personalDetails.address }"><br><br>
+		<label>City:</label>
+		<input type="text" class="form-control" ng-model="personalDetails.city" ng-class="{ 'is-invalid': !personalDetails.city }"><br><br>
+		<label>State:</label>
+		<input type="text" class="form-control" ng-model="personalDetails.state" ng-class="{ 'is-invalid': !personalDetails.state }"><br><br>
+		<label>Zipcode:</label>
+		<input type="text" class="form-control" ng-model="personalDetails.zipcode" ng-class="{ 'is-invalid': !personalDetails.zipcode }"><br><br>
+	</form>
+	<button type="button" class="btn btn-success" ng-click="saveChanges()">Save Changes</button>
+
+	<a href="Settings2.html" class="btn btn-secondary">Back</a></body>
+</html>
